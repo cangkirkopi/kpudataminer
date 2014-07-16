@@ -62,4 +62,11 @@ as prabowo,sum(da_count2) as suara_jokowi, (sum(da_count2)/sum(da_count1+da_coun
 count(*) as form_verified from da1_view d2 where   d2.da_status=1 and d2.p_name=d1.p_name) as form_verified,count(*) as total_form from da1_view d1
 group by p_name 
 order by p_name
+
+
+select p_name, sum(da_count1) suara_prabowo,(sum(da_count1)/sum(da_count1+da_count2))*100
+as prabowo,sum(da_count2) as suara_jokowi, (sum(da_count2)/sum(da_count1+da_count2))*100  as jokowi,(select 
+count(*) as form_verified from da1_view d2 where   d2.da_status=1 and d2.p_name=d1.p_name) as form_verified,count(*) as total_form from da1_view d1
+group by p_name 
+order by p_name
 */

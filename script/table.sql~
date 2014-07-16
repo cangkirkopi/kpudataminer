@@ -46,6 +46,10 @@ group by p_name
 order by p_name);
 
 /*
+
+select   t.p_name, t.suara_prabowo, round(prabowo,2) as prabowo, t.suara_jokowi, round(jokowi,2) as jokowi,
+t.form_verified,t.total_form1,round((t.form_verified::numeric/t.total_form1::numeric)*100,2) as persentase_verified from da1_view2 t
+
 script for query
 select sum(da_count1) as suara_prabowo,(sum(da_count1)/sum(da_count1+da_count2))*100
 as prabowo,sum(da_count2) as suara_jokowi, (sum(da_count2)/sum(da_count1+da_count2))*100  as jokowi , count(*) as form_terverifikasi,
