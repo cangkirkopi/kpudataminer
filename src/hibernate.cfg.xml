@@ -26,6 +26,7 @@
    <mapping class="com.cangkirkopi.kpu.db.model.Kabupaten" /> 
       <mapping class="com.cangkirkopi.kpu.db.model.Kecamatan" />
        <mapping class="com.cangkirkopi.kpu.db.model.Da1" />  
+       <mapping class="com.cangkirkopi.kpu.db.model.Db1" />  
  </session-factory>
  
 </hibernate-configuration>

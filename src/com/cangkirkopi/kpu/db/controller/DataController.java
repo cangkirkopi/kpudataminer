@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import com.cangkirkopi.kpu.db.model.Da1;
+import com.cangkirkopi.kpu.db.model.Db1;
 import com.cangkirkopi.kpu.db.model.Kabupaten;
 import com.cangkirkopi.kpu.db.model.Kecamatan;
 import com.cangkirkopi.kpu.db.model.Propinsi;
@@ -19,6 +20,24 @@ import com.cangkirkopi.kpu.db.model.Propinsi;
 public class DataController {
 	private static final Logger logger = Logger.getLogger(
 			DataController.class.getName());
+	public List<Db1> getDb1List(){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			  Criteria crit = session.createCriteria(Db1.class);
+			  crit.add(Restrictions.eq("db_status", 0));
+			 List<Db1> resultList=crit.list();
+			 return resultList;
+			 
+		} catch (HibernateException e) {
+			
+			logger.error(e.fillInStackTrace());
+			 return null;
+		} finally {
+			if (session.isOpen())
+				session.close();
+			 
+		}
+	}
 	public List<Da1> getDa1List(){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
@@ -349,5 +368,72 @@ public class DataController {
 		}
 	}
 	 
-	
+
+	public void saveOrUpdateDb1(Db1 db1){
+		 
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		 
+	 
+		try {
+			 // Creating a Criteria instance
+            Criteria crit = session.createCriteria(Db1.class);
+            crit.add(Restrictions.eq("k_code", db1.getK_code()));
+           
+            List resultList=crit.list();
+            if (!resultList.isEmpty()) {
+            	updateDb1(db1, null);
+            }
+            else saveDb1(db1, null);
+            	 
+			 
+		} catch (HibernateException e) {
+			 
+			logger.error(e.fillInStackTrace());
+		} finally {
+			if (session.isOpen())
+				session.close();
+			 
+		}
+	}
+	public void saveDb1(Db1 db1,Session session )
+	{
+		logger.info("saving db1");
+		if (session==null)
+			  session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+	 
+		try {
+			transaction = session.beginTransaction();
+			 
+			session.save(db1);
+			transaction.commit();
+		} catch (HibernateException e) {
+			transaction.rollback();
+		 
+			logger.error(e.fillInStackTrace() );
+		} finally {
+			if (session.isOpen())
+			session.close();
+		}
+	 
+	}
+	public void updateDb1(Db1 db1,Session session){
+		logger.info("update db1 "+db1.toString());
+		if (session==null)
+			  session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.saveOrUpdate(db1);
+			transaction.commit();
+			
+		} catch (HibernateException e) {
+			transaction.rollback();
+			e.printStackTrace();
+		} finally {
+			if (session.isOpen())
+			session.close();
+		}
+	}
+	 
 }
