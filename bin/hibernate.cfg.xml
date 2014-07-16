@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+  <!-- <property name="hibernate.connection.password">admin</property>
+  <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/swc3</property>
+  <property name="hibernate.connection.username">postgres</property>  --> 
+  <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  <property name="hibernate.current_session_context_class">thread</property>
+  <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+  <property name="hibernate.generate_statistics">true</property>
+  <property name="hibernate.cache.use_structured_entries">true</property>
+  <!--    <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.cache.use_query_cache">false</property> 
+  <property name="hibernate.cache.use_second_level_cache">false</property> -->
+   <property name="hibernate.connection.isolation">2</property>
+ <property name="hibernate.c3p0.timeout">300</property>
+  <property name="hibernate.c3p0.max_size">100</property>
+  <property name="hibernate.c3p0.max_statements">0</property>
+ <property name="hibernate.c3p0.min_size">5</property>
+  
+  <mapping class="com.cangkirkopi.kpu.db.model.Propinsi" /> 
+   <mapping class="com.cangkirkopi.kpu.db.model.Kabupaten" /> 
+      <mapping class="com.cangkirkopi.kpu.db.model.Kecamatan" />
+       <mapping class="com.cangkirkopi.kpu.db.model.Da1" />  
+ </session-factory>
+ 
+</hibernate-configuration>
