@@ -41,10 +41,8 @@ public class Da1Proc {
 		dataControl=new DataController();
 	}
 	public void da1() throws IOException{
-		logger.info("populating kecamatan...");
-		 
-		//get propinsi list first
-		 
+		logger.info("populating DA1...");
+	 
 		List<Da1> daList = dataControl.getDa1List();
 		logger.info("Data Da1 Count :"+daList.size());
 		for (Da1 da1 : daList){
@@ -80,19 +78,7 @@ public class Da1Proc {
 				 Da1 da1data = new Da1(da1.getKc_code(),da1.getK_code(),1,count1,count2);
 				 dataControl.saveOrUpdateDa1(da1data);
 			 }
-		  	 /*
-			 Elements kecElList  = parent.getElementsByTag("option");
-			 for (Element kecEl : kecElList) {
-				  String optValue = kecEl.attr("value");
-				  String optLabel = kecEl.text();
-				  if (optValue.length()>=1){
-					  logger.info(optValue+":"+optLabel+":"+kab.getK_name());
-					  Kecamatan kec= new Kecamatan(optValue.trim(),optLabel.trim(),kab.getP_code(),kab.getK_code());
-					  dataControl.saveKec(kec,  null);
-				  
-				  }
-			 }
-			 */
+		   
 		}
 	}
 	/**
